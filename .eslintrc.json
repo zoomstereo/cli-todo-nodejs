@@ -1,0 +1,10 @@
+{
+    "env": {
+        "browser": false,
+        "es6": true,
+        "es2024 ": true,
+        "node": true
+    },
+    "plugins": ["jest"],
+    "extends": ["eslint:recommended", "plugin:jest/recommended", "prettier"]
+}
