@@ -105,7 +105,13 @@ class Todo {
     #loadFile = (callback) => {
         fs.readFile(this.#getFileName(), (err, data) => {
             if (err) {
-                console.log("File not found..");
+                console.log("File not found...");
+                fs.writeFile(this.#getFileName(), "", (err) => {
+                    if (err) throw err;
+                });
+                console.log("New file created at desktop");
+                this.showList();
+                return;
             }
             const itemStrList = data.toString().split(os.EOL);
 
@@ -113,7 +119,9 @@ class Todo {
                 this.#stringToItem(itemStr)
             );
 
-            callback(items);
+            const isFileEmpty = itemStrList[0].length === 0;
+
+            callback(isFileEmpty ? [] : items);
         });
     };
 
